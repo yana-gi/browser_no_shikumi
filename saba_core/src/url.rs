@@ -25,15 +25,21 @@ impl Url {
         false
     }
 
+    // ホスト名を戻り値として返す
     fn extract_host(&self) -> String {
         let url_parts: Vec<&str> = self
         .url
+        // 先頭のhttp://を削除
         .trim_start_matches("http://")
+        // 先頭のスラッシュまでを分割
         .splitn(2, '/')
+        // ベクタに格納
         .collect();
 
+        // ポート番号が含まれている場合は、ポート番号より前の文字列を戻り値として返す
         if let Some(index) = url_parts[0].find(':') {
             url_parts[0][..index].to_string()
+        // ポート番号が含まれていない場合は、ホスト名を戻り値として返す
         } else {
             url_parts[0].to_string()
         }
