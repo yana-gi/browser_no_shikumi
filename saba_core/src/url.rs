@@ -1,7 +1,24 @@
 use alloc::string::String;
 use alloc::vec::Vec;
+use alloc::string::ToString;
 
 impl Url {
+    pub fn host(&self)-> String {
+        self.host.clone()
+    }
+
+    pub fn port(&self)-> String {
+        self.port.clone()
+    }
+
+    pub fn path(&self)-> String {
+        self.path.clone()
+    }
+
+    pub fn searchpart(&self)-> String {
+        self.searchpart.clone()
+    }
+
     pub fn new(url: String)-> Self {
         Self {
             url,
@@ -16,6 +33,13 @@ impl Url {
         if !self.is_http() {
             return Err("Only HTTP scheme is supported".to_string());
         }
+
+        self.host = self.extract_host();
+        self.port = self.extract_port();
+        self.path = self.extract_path();
+        self.searchpart = self.extract_searchpart();
+        
+        Ok(self.clone())
     }
 
     fn is_http(&mut self)-> bool {
