@@ -111,6 +111,7 @@ dependencies = [
 name = "saba"
 version = "0.1.0"
 dependencies = [
+ "net_wasabi",
  "noli",
 ]
 

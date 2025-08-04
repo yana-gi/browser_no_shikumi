@@ -15,4 +15,5 @@ required-features = ["wasabi"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-noli = { git = "https://github.com/hikalium/wasabi.git", branch = "for_saba" }
+noli = { git = "https://github.com/hikalium/wasabi.git", branch = "for_saba", optional = true }
+net_wasabi = { path = "net/wasabi", optional = true }
