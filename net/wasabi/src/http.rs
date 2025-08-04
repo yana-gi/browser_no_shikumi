@@ -3,10 +3,10 @@ use alloc::string::String;
 use saba_core::error::Error;
 use saba_core::http::HttpResponse;
 use alloc::format;
-use create::alloc::string::ToString;
-use noil::net::lookup_host;
-use nili::net::SocketAddr;
-use nili::net::TcpStream;
+use alloc::string::ToString;
+use noli::net::lookup_host;
+use noli::net::SocketAddr;
+use noli::net::TcpStream;
 use alloc::vec::Vec;
 
 
@@ -23,7 +23,7 @@ impl HttpClient {
         };
 
         if ips.len() < 1{
-            return Err(Error::Network(format!("Failed to find IP address: {:#?}", e)));
+            return Err(Error::Network(format!("Failed to find IP address for host: {:?}", host)));
         }
 
         let socket_addr: SocketAddr = (ips[0], port).into();
@@ -70,6 +70,6 @@ impl HttpClient {
         match core::str::from_utf8(&received) {
             Ok(response) => HttpResponse::new(response.to_string()),
             Err(e) => return Err(Error::Network(format!("Failed to parse response from TCP stream: {:#?}", e))),
-        };
+        }
     }
 }
